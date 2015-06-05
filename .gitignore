@@ -32,3 +32,5 @@ npm-debug.log
 #Fichero BBDD SQLITE
 quiz.sqlite
 
+#Fichero configuracion Local BBDD
+.env
