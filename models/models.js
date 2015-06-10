@@ -15,14 +15,17 @@ var storage     = process.env.DATABASE_STORAGE;
 var Sequelize = require('sequelize');
 
 var sequelize = new Sequelize(DB_name, user, pwd, 
-	{ 	
+	{
+		
 		dialect:	protocol, 
 	  	protocol:	protocol,
 		port:		port,
 		host:		host,
 		storage:	storage,
 		omitNull:	true
+		
 	}
+	
 );
 
 var quiz_path = path.join(__dirname,'quiz');
@@ -31,15 +34,24 @@ var Quiz = sequelize.import(quiz_path);
 exports.Quiz = Quiz;
 
 sequelize.sync().then(function() {
+	
 	Quiz.count().then(function (count) {
+		
 		if (count === 0){
+			
 			Quiz.create({pregunta: '¿Cual es la capital de Italia?',
 					respuesta: 'Roma'
 				});
+				
 			Quiz.create({pregunta: '¿Cual es la capital de Portugal?',
 					respuesta: 'Lisboa'
+				});
+				
+			Quiz.create({pregunta: '¿Cual es la capital de Alemania?',
+					respuesta: 'Berlin'
 				})
-	.then(function(){console.log('Base de datos Inicializada')});
+				
+			.then(function(){console.log('Base de datos Inicializada')});
 		};
 	
 	});
